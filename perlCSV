@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+# perlCSV.plx
+# 
+#AUTHOR: Thomas E. Falk
+#
+#       01/12/19, 05/24/18
+#
+#usage: perl perlCSV.plx 
+#
+# added @fields with coderunner
+#
+#moving to perl after intial attempts with sed and awk
+#
+# edited_selected.csv is copy_selected.csv with the first two lines deleted
+#
+
+# use strict;
+# use warnings;
+
+	my $filename = "edited_selected.csv";
+
+	open(INPUT, $filename) or die "Cannot open $filename";
+
+	# print headers
+	print "day,glucose,bPressure,weight\n";
+
+	# Read the header line.
+	# my $line = <INPUT>;
+
+	# Read the lines one by one.
+	while($line =<INPUT>)
+	{
+		# print($line);
+
+		# get rid of the pesky newline character
+  		chomp;
+
+  		# read the fields in the current record into an array
+		# ($date, $carbs, $glucose, $bPressure, $weight) = split(/:\s/,$line);
+		#($date, $glucose, $bPressure, $weight) = split (/[2018|ose:\s|lic:\|ght:\s]/),$line ;
+		my @fields = split "," , $line;
+
+		# clean up the variables
+		# $date = substr $date, 4, 14;
+		#$date = substr $1, 4, 14;
+
+  		# print the fields (debug one by one)
+		#print "$date, $carbs, $glucose, $bPressure, $weight";
+		# print "$date, $glucose, $bPressure, $weight \n";
+		#print @fields[3];
+		print \n, scalar(@fields), " = number of records in line", \n;
+	}
+	close(INPUT);
